@@ -1,0 +1,51 @@
+Name: Yaolong Yu
+Clemson Email Address: yaolony@g.clemson.edu
+
+Project no: 4
+Project due date:11/13/2015
+
+Project description:
+
+I have done every items on the checklist.
+
+I use sort for painter's algorithm
+
+For the final game:
+(1) action: move up left down right and diagonal direction.
+(2) blank to shoot bullet, eliminate enemy "zaku" and vessel.
+(3) It will have a boss, a evil gundam.
+(4) special weapon is laser ray, it can eliminate a lot of enemies.
+(5) eliminate "Zaku" get 10 points, eliminate vessel give 30 points and special weapon.
+(6) hit by enemies will reduce health.
+(7) kill boss win.
+(8) I will redesign the motion and weapon animation sheets to make them looks good
+(9) maybe I will add more features depents on how far I can get
+
+
+
+
+How you made your sprites:
+
+I find sprites image from website, I use GIMP to process them.
+
+Gundam: https://galaxyanimasi.wordpress.com/gallery/galery-photo-kegiatan/gambar-animasi/
+
+Enemy: http://s91.photobucket.com/user/GAT-X303X/media/gyanChar.gif.html
+
+Vessel: https://www.rpnation.com/threads/empires-at-war.150532/
+
+background: http://7-themes.com/6917537-space-wallpaper-hd-17147.html
+
+explotion: http://www.codeproject.com/KB/directx/SpaceWarriorPartII/TheExplosion.png
+
+
+
+
+
+
+
+
+
+
+
+
