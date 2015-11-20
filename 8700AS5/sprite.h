@@ -6,7 +6,7 @@
 class Sprite : public Drawable {
 public:
   Sprite(const std::string& name);
-  Sprite(const std::string& name, int Px, int Py, int Vx, int Vy);
+  Sprite(const std::string& name, int Px, int Py, int Vx, int Vy, double scale=1);
   Sprite(const std::string&, 
          const Vector2f& pos, const Vector2f& vel, const Frame*);
   Sprite(const std::string&, const Vector2f& pos, const Vector2f& vel);
@@ -19,6 +19,8 @@ public:
   virtual void draw() const;
 
   virtual void update(Uint32 ticks);
+  double getDistance(const Drawable* obj)const;
+
 
 private:
   const Frame * frame;

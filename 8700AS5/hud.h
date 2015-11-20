@@ -5,11 +5,12 @@
 #include "ioManager.h"
 #include "aaline.h"
 #include "clock.h"
-#include "health.h"
+#include "bulletPool.h"
 
 class Hud {
 public:
-  Hud(const std::string & name);
+  static Hud& getInstance();
+  
   void draw() const;
   void update(Uint32);
   void toggle();
@@ -25,8 +26,10 @@ private:
   const Uint32 color;
   bool bShow;
   int showTime;
-
+  const BulletPool& bulletPool;
   void drawBox() const;
+
+  Hud(const std::string & name);
   Hud(const Hud&);
   Hud& operator=(const Hud&);
 };

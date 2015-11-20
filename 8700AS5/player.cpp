@@ -13,7 +13,7 @@ Player::Player(const std::string& name):
         TwoWaySprite(name),
         state(MOVELEFT),
         gameOver(false),
-        bulletPool("Bullet")
+        bulletPool(BulletPool::getInstance("Bullet"))
 {
     velocity[0] =abs(Gamedata::getInstance().getXmlInt(name+"/speedX"));
     velocity[1] =abs(Gamedata::getInstance().getXmlInt(name+"/speedY"));
@@ -177,11 +177,12 @@ void Player::shoot()
     float x = X() + frameWidth;
     float y = Y() + frameHeight/8;
     bulletPool.shoot(Vector2f(x,y), getVelocity());
-    
-    
 }
 
 
-
+bool Player::hit(const Drawable *obj)
+{
+    return bulletPool.colliedWith(obj);
+}
 
 

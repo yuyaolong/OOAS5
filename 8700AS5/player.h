@@ -13,6 +13,7 @@
 #include "gamedata.h"
 #include "twowaysprite.h"
 #include "bulletPool.h"
+#include "ioManager.h"
 
 class Player: public TwoWaySprite{
 public:
@@ -24,13 +25,13 @@ public:
     
     void setStatus(PlayerStatus s);
     void shoot();
-    
+    bool hit(const Drawable* obj);
     
 private:
     PlayerStatus state;
     bool gameOver;
     float velocity[2];
-    BulletPool bulletPool;
+    BulletPool& bulletPool;
     
     Player(const Player&);
     Player& operator=(const Player&);

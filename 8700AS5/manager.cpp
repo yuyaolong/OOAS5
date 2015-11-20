@@ -36,9 +36,10 @@ Manager::Manager() :
   username(  Gamedata::getInstance().getXmlStr("username") ),
   title( Gamedata::getInstance().getXmlStr("screenTitle") ),
   frameMax( Gamedata::getInstance().getXmlInt("frameMax") ),
-    eachSpritsNumbe(),
-    gundam(),
-    hud("hud"),
+  eachSpritsNumbe(),
+  viewWidth(_gd.getXmlInt("view/width")/2),
+  gundam(),
+  hud(Hud::getInstance()),
     health("health")
 {
      if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -53,36 +54,34 @@ Manager::Manager() :
     worlds.push_back(new World("back3"));
     worlds.push_back(new World("back4"));
     std::sort(worlds.begin(), worlds.end(), FactorCompare());
-    eachSpritsNumbe.push_back(1);
+    
     eachSpritsNumbe.push_back(Gamedata::getInstance().getXmlInt("Enemy/number"));
     eachSpritsNumbe.push_back(Gamedata::getInstance().getXmlInt("Vessel1/number"));
     eachSpritsNumbe.push_back(Gamedata::getInstance().getXmlInt("Explotion/number"));
-
+        eachSpritsNumbe.push_back(1);
     
     gundam = new Player("Gundam");
     gundam -> setStatus(STAND);
     
     
-    for (int i = 0; i< eachSpritsNumbe[1]; i++) {
+    for (int i = 0; i< eachSpritsNumbe[0]; i++) {
         sprites.push_back( new Scaledsprite("Enemy"));
     }
   
-    for (int i=0; i< eachSpritsNumbe[2]; i++) {
+    for (int i=0; i< eachSpritsNumbe[1]; i++) {
         sprites.push_back( new RandomSprite("Vessel1") );
     }
     
 
-    for (int i=0; i< eachSpritsNumbe[3]; i++) {
+    for (int i=0; i< eachSpritsNumbe[2]; i++) {
         sprites.push_back( new Scaledsprite("Explotion") );
     }
     
-    std::sort(sprites.begin(), sprites.end()-1,SpriteCompareLess());
-
-    //std::cout<<"painter sort \n";
-//    for (unsigned int i = 0; i< sprites.size()-1; i++ ) {
-//        std::cout<<sprites[i]->getScale()<<"\n";
-//    }
+    std::sort(sprites.begin(), sprites.begin()+eachSpritsNumbe[0],SpriteCompareLess());
     
+    for (int i=0; i<20; i++) {
+        std::cout<<sprites[i]->getScale()<<"\n";
+    }
     sprites.push_back(gundam);
     currentSprite = sprites.begin();
     viewport.setObjectToTrack(*(sprites.end()-1));
@@ -90,68 +89,69 @@ Manager::Manager() :
 
 
 
-
-void Manager::draw() const {
-  //world.draw();
-    for (unsigned int i=0; i<worlds.size(); i++) {
-        worlds[i]->draw();
+void Manager::enemyCollisonDetec()
+{
+    for (int i=0; i<eachSpritsNumbe[0]; i++) {
+        if (sprites[i]->X()<(gundam->X() + viewWidth*1.5)  && sprites[i]->X()>gundam->X() ) {
+            
+            if (gundam->hit(sprites[i])) {
+                std::cout<<"collision: "<<i<<"\n";
+            }
+            
+        }
     }
-  clock.draw();
-  std::vector<Drawable*>::const_iterator ptr = sprites.begin();
-  while ( ptr != sprites.end() ) {
-    (*ptr)->draw();
-    ++ptr;
-  }
-  io.printMessageAt(title, 650, 450);
-    hud.draw();
-    health.draw();
-  viewport.draw();
-    
-    
-  SDL_Flip(screen);
 }
-
-// Move this to IOManager
-// void Manager::makeFrame() {
-//   std::stringstream strm;
-//   strm << "frames/" << username<< '.' 
-//        << std::setfill('0') << std::setw(4) 
-//        << frameCount++ << ".bmp";
-//   std::string filename( strm.str() );
-//   std::cout << "Making frame: " << filename << std::endl;
-//   SDL_SaveBMP(screen, filename.c_str());
-// }
 
 void Manager::switchSprite() {
     static int whichKindSprite = 0;
     whichKindSprite++;
     for (int k=0; k<eachSpritsNumbe[whichKindSprite%(eachSpritsNumbe.size())]; ++k) {
-         currentSprite++;
+        currentSprite++;
     }
- 
-  if ( currentSprite == sprites.end() ) {
-    currentSprite = sprites.begin();
-  }
-  viewport.setObjectToTrack(*currentSprite);
+    
+    if ( currentSprite == sprites.end() ) {
+        currentSprite = sprites.begin();
+    }
+    viewport.setObjectToTrack(*currentSprite);
 }
 
+
+void Manager::draw() const {
+    for (unsigned int i=0; i<worlds.size(); i++) {
+            worlds[i]->draw();
+        }
+    clock.draw();
+    std::vector<Drawable*>::const_iterator ptr = sprites.begin();
+    while ( ptr != sprites.end() ) {
+      (*ptr)->draw();
+      ++ptr;
+    }
+    io.printMessageAt(title, 650, 450);
+    hud.draw();
+    health.draw();
+    viewport.draw();
+    SDL_Flip(screen);
+}
+
+
 void Manager::update() {
-  clock.update();
-  Uint32 ticks = clock.getTicksSinceLastFrame();
-  std::vector<Drawable*>::const_iterator ptr = sprites.begin();
-  while ( ptr != sprites.end() ) {
-    (*ptr)->update(ticks);
-    ++ptr;
-  }
-  if ( makeVideo && frameCount < frameMax ) {
-    io.makeFrame(frameCount);
-  }
+    clock.update();
+    Uint32 ticks = clock.getTicksSinceLastFrame();
+    std::vector<Drawable*>::const_iterator ptr = sprites.begin();
+    while ( ptr != sprites.end() ) {
+        (*ptr)->update(ticks);
+        ++ptr;
+    }
+    if ( makeVideo && frameCount < frameMax ) {
+        io.makeFrame(frameCount);
+    }
     for (unsigned int i=0; i<worlds.size(); i++) {
         worlds[i]->update();
     }
     hud.update(ticks);
     health.update(ticks);
-  viewport.update(); // always update viewport last
+    viewport.update(); // always update viewport last
+    enemyCollisonDetec();
 }
 
 void Manager::play() {
@@ -242,9 +242,6 @@ void Manager::play() {
         {
             gundam->setStatus(STAND);
         }
-        
-        
-
     }
 
     update();

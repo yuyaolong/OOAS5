@@ -14,19 +14,23 @@
 
 class BulletPool {
 public:
-    BulletPool(const std::string &);
+    static BulletPool& getInstance(const std::string& n);
+    
     ~BulletPool() {};
     void draw() const;
     void update(Uint32 ticks);
     
     void shoot(const Vector2f& pos, const Vector2f& vel);
     bool colliedWith(const Drawable* obj) const;
-    unsigned bulletCount() const { return bulletList.size(); }
-    unsigned freeCount() const { return freeList.size(); }
+    unsigned int bulletCount() const { return bulletList.size(); }
+    unsigned int freeCount() const { return freeList.size(); }
     bool isShooting() const { return bulletList.empty(); }
 
 
 private:
+    BulletPool(const std::string& n);
+    BulletPool(const BulletPool&);
+    BulletPool& operator=(const BulletPool&);
     std::string name;
     float frameInterval;
     float timeSinceLastFrame;

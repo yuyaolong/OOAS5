@@ -93,8 +93,6 @@
   <LEFTDU  min="15" max="17"/>
   <SHOOT min="18" max="20"/>
   <FIRE min="21" max="23"/>
-  
-  
   <srcX>0</srcX>
   <srcY>0</srcY>
   <width>85</width>
@@ -102,6 +100,10 @@
   <speedX>300</speedX>
   <speedY>300</speedY>
   <transparency>true</transparency>
+  <chunk>
+      <size>9</size>
+      <distance>200</distance>
+  </chunk>
 </Gundam>
 
 <Enemy>
@@ -111,7 +113,6 @@
   <number>20</number>
   <frames>9</frames>
   <frameInterval>200</frameInterval>
-
   <srcX>0</srcX>
   <srcY>0</srcY>
   <width>85</width>
@@ -119,6 +120,10 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+  <chunk>
+      <size>9</size>
+      <distance>200</distance>
+  </chunk>
 </Enemy>
 
 <Explotion>
@@ -162,7 +167,7 @@
     <srcY>0</srcY>
     <width>77</width>
     <height>16</height>
-    <speedX>600</speedX>
+    <speedX>700</speedX>
     <speedY>0</speedY>
     <transparency>true</transparency>
 </Bullet>
@@ -172,7 +177,7 @@
     <x>7</x>
     <y>15</y>
     <length>260</length>
-    <width>180</width>
+    <width>220</width>
     <thick>2</thick>
     <showtime>3000</showtime>
 </hud>

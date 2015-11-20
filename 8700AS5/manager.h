@@ -10,44 +10,46 @@
 #include "hud.h"
 #include "health.h"
 #include "scaledsprite.h"
+#include "bulletPool.h"
 
 class Manager {
 public:
-  Manager ();
-  ~Manager ();
-  void play();
-  void switchSprite();
+    Manager ();
+    ~Manager ();
+    void play();
+    void switchSprite();
 
 private:
-  const bool env;
-  const IOManager& io;
-  Clock& clock;
+    const bool env;
+    const IOManager& io;
+    Clock& clock;
 
-  SDL_Surface * const screen;
-  //World world;
-  Viewport& viewport;
+    SDL_Surface * const screen;
+    Viewport& viewport;
 
-  std::vector<World*> worlds;
-  std::vector<Drawable*> sprites;
-  std::vector<Drawable*>::iterator currentSprite;
+    std::vector<World*> worlds;
+    std::vector<Drawable*> sprites;
+    std::vector<Drawable*>::iterator currentSprite;
 
     
-  bool makeVideo;
-  int frameCount;
-  const std::string username;
-  const std::string title;
-  const int frameMax;
-    
-  std::vector<int> eachSpritsNumbe;
+    bool makeVideo;
+    int frameCount;
+    const std::string username;
+    const std::string title;
+    const int frameMax;
+    std::vector<int> eachSpritsNumbe;
+    int viewWidth;
     
     Player *gundam;
-    Hud hud;
+    Hud& hud;
     Health health;
     
-  void draw() const;
-  void update();
+    void draw() const;
+    void update();
 
-  Manager(const Manager&);
-  Manager& operator=(const Manager&);
-  void makeFrame();
+    Manager(const Manager&);
+    Manager& operator=(const Manager&);
+    void makeFrame();
+    void enemyCollisonDetec();
+
 };

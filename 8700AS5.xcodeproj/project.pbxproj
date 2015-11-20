@@ -25,13 +25,15 @@
 		E1099DE91BF940A5001C0027 /* randomSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DCA1BF940A5001C0027 /* randomSprite.cpp */; };
 		E1099DEA1BF940A5001C0027 /* scaledsprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DCD1BF940A5001C0027 /* scaledsprite.cpp */; };
 		E1099DEB1BF940A5001C0027 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DCF1BF940A5001C0027 /* sprite.cpp */; };
-		E1099DEC1BF940A5001C0027 /* twowaysprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DD11BF940A5001C0027 /* twowaysprite.cpp */; };
 		E1099DED1BF940A5001C0027 /* vector2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DD31BF940A5001C0027 /* vector2f.cpp */; };
 		E1099DEE1BF940A5001C0027 /* viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DD51BF940A5001C0027 /* viewport.cpp */; };
 		E1099DEF1BF940A5001C0027 /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DD71BF940A5001C0027 /* world.cpp */; };
 		E1099DF51BF9436E001C0027 /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DF31BF9436E001C0027 /* bullet.cpp */; };
 		E1099DF81BF96FF4001C0027 /* bulletPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DF61BF96FF4001C0027 /* bulletPool.cpp */; };
 		E1099DFB1BF97AA2001C0027 /* collisionStrategy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DF91BF97AA2001C0027 /* collisionStrategy.cpp */; };
+		E143C9B61BFFB0BF00970EBE /* chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9B21BFFB0BF00970EBE /* chunk.cpp */; };
+		E143C9B71BFFB0BF00970EBE /* explodingSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9B41BFFB0BF00970EBE /* explodingSprite.cpp */; };
+		E143C9BA1BFFC42B00970EBE /* twowaysprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9B81BFFC42B00970EBE /* twowaysprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,8 +89,6 @@
 		E1099DCE1BF940A5001C0027 /* scaledsprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scaledsprite.h; sourceTree = "<group>"; };
 		E1099DCF1BF940A5001C0027 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		E1099DD01BF940A5001C0027 /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprite.h; sourceTree = "<group>"; };
-		E1099DD11BF940A5001C0027 /* twowaysprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twowaysprite.cpp; sourceTree = "<group>"; };
-		E1099DD21BF940A5001C0027 /* twowaysprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twowaysprite.h; sourceTree = "<group>"; };
 		E1099DD31BF940A5001C0027 /* vector2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector2f.cpp; sourceTree = "<group>"; };
 		E1099DD41BF940A5001C0027 /* vector2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector2f.h; sourceTree = "<group>"; };
 		E1099DD51BF940A5001C0027 /* viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewport.cpp; sourceTree = "<group>"; };
@@ -102,6 +102,12 @@
 		E1099DF71BF96FF4001C0027 /* bulletPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bulletPool.h; sourceTree = "<group>"; };
 		E1099DF91BF97AA2001C0027 /* collisionStrategy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = collisionStrategy.cpp; sourceTree = "<group>"; };
 		E1099DFA1BF97AA2001C0027 /* collisionStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collisionStrategy.h; sourceTree = "<group>"; };
+		E143C9B21BFFB0BF00970EBE /* chunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chunk.cpp; sourceTree = "<group>"; };
+		E143C9B31BFFB0BF00970EBE /* chunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chunk.h; sourceTree = "<group>"; };
+		E143C9B41BFFB0BF00970EBE /* explodingSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = explodingSprite.cpp; sourceTree = "<group>"; };
+		E143C9B51BFFB0BF00970EBE /* explodingSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = explodingSprite.h; sourceTree = "<group>"; };
+		E143C9B81BFFC42B00970EBE /* twowaysprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twowaysprite.cpp; sourceTree = "<group>"; };
+		E143C9B91BFFC42B00970EBE /* twowaysprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twowaysprite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +188,10 @@
 		E1099DF11BF94147001C0027 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				E143C9B21BFFB0BF00970EBE /* chunk.cpp */,
+				E143C9B31BFFB0BF00970EBE /* chunk.h */,
+				E143C9B41BFFB0BF00970EBE /* explodingSprite.cpp */,
+				E143C9B51BFFB0BF00970EBE /* explodingSprite.h */,
 				E1099DB21BF940A5001C0027 /* frame.cpp */,
 				E1099DB31BF940A5001C0027 /* frame.h */,
 				E1099DB41BF940A5001C0027 /* frameFactory.cpp */,
@@ -193,8 +203,8 @@
 				E1099DC51BF940A5001C0027 /* multisprite.h */,
 				E1099DCA1BF940A5001C0027 /* randomSprite.cpp */,
 				E1099DCB1BF940A5001C0027 /* randomSprite.h */,
-				E1099DD11BF940A5001C0027 /* twowaysprite.cpp */,
-				E1099DD21BF940A5001C0027 /* twowaysprite.h */,
+				E143C9B81BFFC42B00970EBE /* twowaysprite.cpp */,
+				E143C9B91BFFC42B00970EBE /* twowaysprite.h */,
 				E1099DCD1BF940A5001C0027 /* scaledsprite.cpp */,
 				E1099DCE1BF940A5001C0027 /* scaledsprite.h */,
 			);
@@ -272,7 +282,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1099DEC1BF940A5001C0027 /* twowaysprite.cpp in Sources */,
+				E143C9B61BFFB0BF00970EBE /* chunk.cpp in Sources */,
+				E143C9B71BFFB0BF00970EBE /* explodingSprite.cpp in Sources */,
 				E1099DF81BF96FF4001C0027 /* bulletPool.cpp in Sources */,
 				E1099DDE1BF940A5001C0027 /* frameFactory.cpp in Sources */,
 				E1099DE11BF940A5001C0027 /* hud.cpp in Sources */,
@@ -287,6 +298,7 @@
 				E1099DE01BF940A5001C0027 /* health.cpp in Sources */,
 				E1099DE51BF940A5001C0027 /* manager.cpp in Sources */,
 				E1099DEB1BF940A5001C0027 /* sprite.cpp in Sources */,
+				E143C9BA1BFFC42B00970EBE /* twowaysprite.cpp in Sources */,
 				E1099DF51BF9436E001C0027 /* bullet.cpp in Sources */,
 				E1099DDA1BF940A5001C0027 /* aaline.cpp in Sources */,
 				E1099DE91BF940A5001C0027 /* randomSprite.cpp in Sources */,
@@ -415,6 +427,7 @@
 				E1099DA91BF93F40001C0027 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

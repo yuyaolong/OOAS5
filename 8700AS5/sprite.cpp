@@ -15,9 +15,9 @@ Sprite::Sprite(const std::string& name) :
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
 
-Sprite::Sprite(const std::string& name, int Px, int Py, int Vx, int Vy) :
-Drawable(name, Vector2f(Px, Py), Vector2f(Vx, Vy)),
-frame( FrameFactory::getInstance().getFrame(name) ),
+Sprite::Sprite(const std::string& name, int Px, int Py, int Vx, int Vy, double scale) :
+Drawable(name, Vector2f(Px, Py), Vector2f(Vx, Vy),scale),
+frame( FrameFactory::getInstance().getFrame(name)),
 frameWidth(frame->getWidth()),
 frameHeight(frame->getHeight()),
 worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
@@ -82,3 +82,9 @@ void Sprite::update(Uint32 ticks) {
     velocityX( -abs( velocityX() ) );
   }  
 }
+
+double Sprite::getDistance(const Drawable *obj) const
+{
+    return hypot(X()-obj->X(), Y()-obj->Y());
+}
+

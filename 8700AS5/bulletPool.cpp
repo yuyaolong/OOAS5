@@ -11,8 +11,16 @@
 #include "gamedata.h"
 #include "ioManager.h"
 
+
+BulletPool& BulletPool::getInstance(const std::string& n)
+{
+    static BulletPool bulletpool(n);
+    return bulletpool;
+}
+
+
 BulletPool::BulletPool(const std::string& n):
-                                    name(n),
+                        name(n),
                         frameInterval(_gd.getXmlInt(name+"/frameInterval")),
                         timeSinceLastFrame(0),
                         bulletList(),
@@ -24,9 +32,12 @@ BulletPool::BulletPool(const std::string& n):
 }
 
 
+
+
+
 bool BulletPool::colliedWith(const Drawable *obj) const
 {
-    PerPixelCollisionStrategy pcs;
+    static PerPixelCollisionStrategy pcs;
     std::list<Bullet>::iterator ptr = bulletList.begin();
     while (ptr != bulletList.end()) {
         if (pcs.execute(*ptr, *obj)) {
@@ -64,8 +75,8 @@ void BulletPool::shoot(const Vector2f& pos, const Vector2f& vel)
 }
 
 void BulletPool::draw() const {
-    IOManager::getInstance().printMessageValueAt("Bullets: ", bulletCount(), 700, 20);
-    IOManager::getInstance().printMessageValueAt("FreeList: ", freeCount(), 700, 40);
+    //IOManager::getInstance().printMessageValueAt("Bullets: ", bulletCount(), 700, 20);
+    //IOManager::getInstance().printMessageValueAt("FreeList: ", freeCount(), 700, 40);
     std::list<Bullet>::const_iterator ptr = bulletList.begin();
     while(ptr != bulletList.end()) {
         ptr->draw();

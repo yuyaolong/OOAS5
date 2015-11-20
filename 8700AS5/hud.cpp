@@ -1,5 +1,11 @@
 #include "hud.h"
 
+Hud& Hud::getInstance()
+{
+    static Hud instance("hud");
+    return instance;
+}
+
 Hud::Hud(const std::string & name) :
   io(IOManager::getInstance()),
   clock( Clock::getInstance() ),
@@ -12,7 +18,8 @@ Hud::Hud(const std::string & name) :
   deltaTime(0),
   color(SDL_MapRGB(screen->format, 0x00, 0xff, 0x00)),
   bShow(true),
-  showTime(Gamedata::getInstance().getXmlInt(name+"/showtime"))
+  showTime(Gamedata::getInstance().getXmlInt(name+"/showtime")),
+  bulletPool(BulletPool::getInstance("Bullet"))
 {
 }
 
@@ -48,10 +55,12 @@ void Hud::draw() const {
     io.printMessageAt("W - move up", 10, 120);
     io.printMessageAt("l - slow; p - pasue", 10, 140);
     io.printMessageAt("you can press both buttons", 10, 160);
-    
     //io.printMessageAt("r - restart game", 10, 140);
     //io.printMessageAt("SPACE - throw acorn", 10, 160);
     io.printMessageAt("Press T to switch sprites", 10, 180);
+    //std::cout<<&bulletpool<<"\n";
+    io.printMessageValueAt("Bullets: ", bulletPool.bulletCount(), 140, 20);
+    io.printMessageValueAt("FreeList: ", bulletPool.freeCount(), 140, 40);
   } else {
     io.printMessageAt("F1 Help", 10, 20);
   }
