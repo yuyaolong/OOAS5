@@ -3,7 +3,7 @@
 #include "explodingSprite.h"
 
 ExplodingSprite::ExplodingSprite(const Sprite& s) :
-  Sprite(s),
+  Sprite(s), 
   chunks(), 
   freeList(),
   frames() {

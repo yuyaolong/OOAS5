@@ -3,12 +3,12 @@
 #include <string>
 #include <vector>
 #include "drawable.h"
-
+#include "explodingSprite.h"
 class TwoWaySprite : public Drawable {
 public:
 
   TwoWaySprite(const std::string&);
-    TwoWaySprite(const std::string&, int Px, int Py, int Vx, int Vy, double scale=1);
+  TwoWaySprite(const std::string&, int Px, int Py, int Vx, int Vy, double scale=1);
     
     
   virtual ~TwoWaySprite() { } 
@@ -19,7 +19,10 @@ public:
     return frames[currentFrame]; 
   }
 
+  void explode();
+    
 protected:
+  ExplodingSprite* explosion;
   const std::vector<Frame *> frames;
   int worldWidth;
   int worldHeight;
@@ -35,6 +38,7 @@ protected:
     int flipY;
     
   virtual void advanceFrame(Uint32 ticks);
+    TwoWaySprite();
   TwoWaySprite(const TwoWaySprite&);
   TwoWaySprite& operator=(const TwoWaySprite&);
 };

@@ -2,8 +2,7 @@
 #include <list>
 #include "chunk.h"
 
-
-class ExplodingSprite : public Sprite{
+class ExplodingSprite : public Sprite {
 public:
   ExplodingSprite(const Sprite& s);
   ~ExplodingSprite();

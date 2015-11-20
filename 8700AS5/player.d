@@ -1,3 +1,3 @@
 player.o player.d : player.cpp player.h gamedata.h vector2f.h parseXML.h \
- twowaysprite.h drawable.h frame.h bulletPool.h bullet.h multisprite.h \
- ioManager.h
+ twowaysprite.h drawable.h frame.h explodingSprite.h chunk.h sprite.h \
+ bulletPool.h bullet.h multisprite.h ioManager.h
