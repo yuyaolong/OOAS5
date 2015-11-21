@@ -50,6 +50,7 @@ private:
     Manager(const Manager&);
     Manager& operator=(const Manager&);
     void makeFrame();
-    void enemyCollisonDetec();
-
+    void enemyCollisionDetec();
+    void cleanHitedSprite();
+    
 };

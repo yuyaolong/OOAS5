@@ -10,15 +10,15 @@ Hud::Hud(const std::string & name) :
   io(IOManager::getInstance()),
   clock( Clock::getInstance() ),
   screen(io.getScreen()),
-  position(Vector2f(Gamedata::getInstance().getXmlInt(name+"/x"), 
-  		Gamedata::getInstance().getXmlInt(name+"/y"))), 
-  length(Gamedata::getInstance().getXmlInt(name+"/length")), 
-  width(Gamedata::getInstance().getXmlInt(name+"/width")), 
-  thick(Gamedata::getInstance().getXmlFloat(name+"/thick")),
+  position(Vector2f(_gd.getXmlInt(name+"/x"),
+  		_gd.getXmlInt(name+"/y"))), 
+  length(_gd.getXmlInt(name+"/length")), 
+  width(_gd.getXmlInt(name+"/width")), 
+  thick(_gd.getXmlFloat(name+"/thick")),
   deltaTime(0),
   color(SDL_MapRGB(screen->format, 0x00, 0xff, 0x00)),
   bShow(true),
-  showTime(Gamedata::getInstance().getXmlInt(name+"/showtime")),
+  showTime(_gd.getXmlInt(name+"/showtime")),
   bulletPool(BulletPool::getInstance("Bullet"))
 {
 }

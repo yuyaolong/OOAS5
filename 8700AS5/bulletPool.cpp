@@ -35,7 +35,7 @@ BulletPool::BulletPool(const std::string& n):
 
 
 
-bool BulletPool::colliedWith(const Drawable *obj) const
+bool BulletPool::collidedWith(const Drawable *obj) const
 {
     static PerPixelCollisionStrategy pcs;
     std::list<Bullet>::iterator ptr = bulletList.begin();

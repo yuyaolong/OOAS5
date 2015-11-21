@@ -15,6 +15,7 @@
 #include "bulletPool.h"
 #include "ioManager.h"
 
+
 class Player: public TwoWaySprite{
 public:
     Player(const std::string&);
@@ -26,16 +27,20 @@ public:
     void setStatus(PlayerStatus s);
     void shoot();
     bool hit(const Drawable* obj);
+    void laserFire();
     
 private:
     PlayerStatus state;
     bool gameOver;
     float velocity[2];
     BulletPool& bulletPool;
+    MultiSprite* laser;
+    bool laserFired;
+    int laserTime;
+    int delatTime;
     
     Player(const Player&);
     Player& operator=(const Player&);
-    
     virtual void advanceFrame(Uint32 ticks);
     
     

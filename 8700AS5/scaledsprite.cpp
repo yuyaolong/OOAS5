@@ -16,8 +16,8 @@ Scaledsprite::Scaledsprite(const std::string& name): TwoWaySprite(name,
                                                    Gamedata::getInstance().getXmlInt(name+"/speedY")*(rand()%2?-1:+1),
                                                                   Gamedata::getInstance().getRandFloat(Gamedata::getInstance().getXmlFloat(name+"/scale/min"),
                                                                                                              Gamedata::getInstance().getXmlFloat(name+"/scale/max"))
-                                                                
-                                                   )
+                                                   ),
+reDisplay(true)
 
 
 {
@@ -27,11 +27,26 @@ Scaledsprite::Scaledsprite(const std::string& name): TwoWaySprite(name,
 
 
 void Scaledsprite::draw() const {
-    Uint32 x = static_cast<Uint32>(X());
-    Uint32 y = static_cast<Uint32>(Y());
-    getFrame()->draw(x, y, 0, flipX, flipY, getScale());
+    if (explosion) {
+        explosion->draw();
+        return;
+    }
+    if (reDisplay) {
+        Uint32 x = static_cast<Uint32>(X());
+        Uint32 y = static_cast<Uint32>(Y());
+        getFrame()->draw(x, y, 0, flipX, flipY, getScale());
+    }
 }
-      
+
+void Scaledsprite::setReDisplay(bool reds)
+{
+    reDisplay = reds;
+}
+
+bool Scaledsprite::getReDisplay()const
+{
+    return reDisplay;
+}
 
       
       

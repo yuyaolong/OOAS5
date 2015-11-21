@@ -19,8 +19,9 @@ public:
   virtual void draw() const;
 
   virtual void update(Uint32 ticks);
-  double getDistance(const Drawable* obj)const;
-
+  int getDistance(const Drawable* obj)const;
+    
+  virtual bool collidedWith(const Drawable*) const;
 
 private:
   const Frame * frame;

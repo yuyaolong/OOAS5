@@ -89,18 +89,46 @@ Manager::Manager() :
 
 
 
-void Manager::enemyCollisonDetec()
+void Manager::enemyCollisionDetec()
 {
     for (int i=0; i<eachSpritsNumbe[0]; i++) {
         if (sprites[i]->X()<(gundam->X() + viewWidth*1.5)  && sprites[i]->X()>gundam->X() ) {
-            
-            if (gundam->hit(sprites[i])) {
+            Scaledsprite* tmp = dynamic_cast<Scaledsprite*>(sprites[i]);
+            if (tmp->getReDisplay() && gundam->hit(tmp)) {
+                tmp->setReDisplay(false);
+                tmp->explode();
                 std::cout<<"collision: "<<i<<"\n";
             }
             
+            
+            if (tmp->getReDisplay() && tmp->collidedWith(gundam)) {
+                gundam->explode();
+            }
         }
+
     }
 }
+
+
+void Manager::cleanHitedSprite()
+{
+    std::vector<Drawable*>::iterator ptr = sprites.begin();
+    for (int i=0; i<eachSpritsNumbe[0]; i++) {
+        if ((dynamic_cast<TwoWaySprite*>(*ptr))->canDelete) {
+            std::cout<<"delete sprite\n";
+            delete *ptr;
+            ptr = sprites.erase(ptr);
+            eachSpritsNumbe[0] = eachSpritsNumbe[0]-1;
+        }
+        else
+            ptr++;
+    }
+    
+    
+}
+
+
+
 
 void Manager::switchSprite() {
     static int whichKindSprite = 0;
@@ -135,6 +163,7 @@ void Manager::draw() const {
 
 
 void Manager::update() {
+    cleanHitedSprite();
     clock.update();
     Uint32 ticks = clock.getTicksSinceLastFrame();
     std::vector<Drawable*>::const_iterator ptr = sprites.begin();
@@ -151,7 +180,7 @@ void Manager::update() {
     hud.update(ticks);
     health.update(ticks);
     viewport.update(); // always update viewport last
-    enemyCollisonDetec();
+    enemyCollisionDetec();
 }
 
 void Manager::play() {
@@ -219,6 +248,7 @@ void Manager::play() {
         if(keystate[SDLK_z])
         {
             gundam->setStatus(FIRE);
+            gundam->laserFire();
         }
         
         if (keystate[SDLK_w] && keystate[SDLK_d]) {

@@ -9,18 +9,18 @@ public:
 
   TwoWaySprite(const std::string&);
   TwoWaySprite(const std::string&, int Px, int Py, int Vx, int Vy, double scale=1);
+  
     
-    
-  virtual ~TwoWaySprite() { } 
+  virtual ~TwoWaySprite();
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
   virtual const Frame* getFrame() const { 
     return frames[currentFrame]; 
   }
-
   void explode();
-    
+    virtual bool collidedWith(const Drawable*) const;
+    bool canDelete;
 protected:
   ExplodingSprite* explosion;
   const std::vector<Frame *> frames;
@@ -34,11 +34,11 @@ protected:
   int frameWidth;
   int frameHeight;
 
-    int flipX;
-    int flipY;
+  int flipX;
+  int flipY;
+  
     
   virtual void advanceFrame(Uint32 ticks);
-    TwoWaySprite();
   TwoWaySprite(const TwoWaySprite&);
   TwoWaySprite& operator=(const TwoWaySprite&);
 };

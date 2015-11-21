@@ -1,7 +1,7 @@
 #include "multisprite.h"
 #include "gamedata.h"
 #include "frameFactory.h"
-
+#include "collisionStrategy.h"
 void MultiSprite::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
 	if (timeSinceLastFrame > frameInterval) {
@@ -73,3 +73,12 @@ void MultiSprite::update(Uint32 ticks) {
   }  
 
 }
+
+
+bool MultiSprite::collidedWith(const Drawable * obj) const
+{
+    static PerPixelCollisionStrategy pcs;
+    return pcs.execute(*this, *obj);
+    
+}
+

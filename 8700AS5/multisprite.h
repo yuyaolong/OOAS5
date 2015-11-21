@@ -16,6 +16,7 @@ public:
   virtual const Frame* getFrame() const { 
     return frames[currentFrame]; 
   }
+  virtual bool collidedWith(const Drawable*) const;
 
 protected:
   const std::vector<Frame *> frames;

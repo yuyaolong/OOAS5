@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "gamedata.h"
 #include "frameFactory.h"
+#include "collisionStrategy.h"
 Sprite::Sprite(const std::string& name) :
   Drawable(name,
            Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"),
@@ -33,6 +34,16 @@ Sprite::Sprite(const string& n, const Vector2f& pos, const Vector2f& vel,
   frameHeight(frame->getHeight()),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
+{ }
+
+
+Sprite::Sprite(const string& n, const Vector2f& pos, const Vector2f& vel):
+Drawable(n, pos, vel),
+frame( FrameFactory::getInstance().getFrame(n) ),
+frameWidth(frame->getWidth()),
+frameHeight(frame->getHeight()),
+worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
 
 Sprite::Sprite(const Sprite& s) :
@@ -83,8 +94,15 @@ void Sprite::update(Uint32 ticks) {
   }  
 }
 
-double Sprite::getDistance(const Drawable *obj) const
+int Sprite::getDistance(const Drawable *obj) const
 {
     return hypot(X()-obj->X(), Y()-obj->Y());
+}
+
+bool Sprite::collidedWith(const Drawable * obj) const
+{
+    static PerPixelCollisionStrategy pcs;
+    return pcs.execute(*this, *obj);
+    
 }
 

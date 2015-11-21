@@ -13,76 +13,60 @@ Player::Player(const std::string& name):
         TwoWaySprite(name),
         state(MOVELEFT),
         gameOver(false),
-        bulletPool(BulletPool::getInstance("Bullet"))
+        bulletPool(BulletPool::getInstance("Bullet")),
+        laser(NULL),
+        laserFired(false),
+        laserTime(_gd.getXmlInt("Laser/showtime")),
+        delatTime(0)
 {
-    velocity[0] =abs(Gamedata::getInstance().getXmlInt(name+"/speedX"));
-    velocity[1] =abs(Gamedata::getInstance().getXmlInt(name+"/speedY"));
+    velocity[0] =abs(_gd.getXmlInt(name+"/speedX"));
+    velocity[1] =abs(_gd.getXmlInt(name+"/speedY"));
 }
-
-
-
-
 
 void Player::draw() const
 {
+
     if (!gameOver) {
+        if (explosion) {
+            explosion->draw();
+            return;
+        }
+        if (laserFired) {
+            laser->draw();
+        }
+        
          TwoWaySprite::draw();
          bulletPool.draw();
     }
 }
 
-void Player::setStatus(PlayerStatus s)
-{
-    state = s;
-    switch (state) {
-        case STAND:
-            velocityX(0);
-            velocityY(0);
-            break;
-        case MOVERIGHT:
-            velocityX(velocity[0]);
-            velocityY(0);
-            //flipX = 1;
-            break;
-        case MOVELEFT:
-            velocityX(-1*velocity[0]);
-            velocityY(0);
-            //flipX = -1;
-            break;
-        case MOVEUP:
-            velocityX(0);
-            velocityY(-1*velocity[1]);
-            break;
-        case MOVEDOWN:
-            velocityX(0);
-            velocityY(velocity[1]);
-            break;
-        case UPRIGHT:
-            velocityX(velocity[0]);
-            velocityY(-1*velocity[1]);
-            break;
-        case UPLEFT:
-            velocityX(-velocity[0]);
-            velocityY(-1*velocity[1]);
-            break;
-        case DOWNRIGHT:
-            velocityX(velocity[0]);
-            velocityY(1*velocity[1]);
-            break;
-        case DOWNLEFT:
-            velocityX(-velocity[0]);
-            velocityY(1*velocity[1]);
-            break;
-        default:
-            break;
-    }
-}
 
 
 void Player:: update(unsigned int ticks)
 {
     if (!gameOver) {
+        
+        if (explosion) {
+            explosion->update(ticks);
+            if ( explosion->chunkCount() == 0 ) {
+                delete explosion;
+                explosion = NULL;
+            }
+            return;
+        }
  
+        if (laserFired) {
+            laser->update(ticks);
+            delatTime+=ticks;
+            state = FIRE;
+            if (delatTime > laserTime) {
+                laserFired = false;
+                delatTime =0;
+                delete laser;
+                laser = NULL;
+            }
+        }
+        
         advanceFrame(ticks);
         
         Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
@@ -112,6 +96,58 @@ void Player:: update(unsigned int ticks)
 }
 
 
+void Player::setStatus(PlayerStatus s)
+{
+    
+    
+    state = s;
+    if (!laserFired) {
+        switch (state) {
+            case STAND:
+                velocityX(0);
+                velocityY(0);
+                break;
+            case MOVERIGHT:
+                velocityX(velocity[0]);
+                velocityY(0);
+                //flipX = 1;
+                break;
+            case MOVELEFT:
+                velocityX(-1*velocity[0]);
+                velocityY(0);
+                //flipX = -1;
+                break;
+            case MOVEUP:
+                velocityX(0);
+                velocityY(-1*velocity[1]);
+                break;
+            case MOVEDOWN:
+                velocityX(0);
+                velocityY(velocity[1]);
+                break;
+            case UPRIGHT:
+                velocityX(velocity[0]);
+                velocityY(-1*velocity[1]);
+                break;
+            case UPLEFT:
+                velocityX(-velocity[0]);
+                velocityY(-1*velocity[1]);
+                break;
+            case DOWNRIGHT:
+                velocityX(velocity[0]);
+                velocityY(1*velocity[1]);
+                break;
+            case DOWNLEFT:
+                velocityX(-velocity[0]);
+                velocityY(1*velocity[1]);
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+
 void Player::advanceFrame(Uint32 ticks)
 {
     unsigned int min = 0;
@@ -119,46 +155,46 @@ void Player::advanceFrame(Uint32 ticks)
     
     switch (state) {
         case STAND:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/STAND/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/STAND/max");
+            min = _gd.getXmlInt(getName()+"/STAND/min");
+            max = _gd.getXmlInt(getName()+"/STAND/max");
             break;
         case MOVEUP:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/UP/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/UP/max");
+            min = _gd.getXmlInt(getName()+"/UP/min");
+            max = _gd.getXmlInt(getName()+"/UP/max");
             break;
         case MOVERIGHT:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/RIGHT/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/RIGHT/max");
+            min = _gd.getXmlInt(getName()+"/RIGHT/min");
+            max = _gd.getXmlInt(getName()+"/RIGHT/max");
             break;
         case MOVEDOWN:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/DOWN/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/DOWN/max");
+            min = _gd.getXmlInt(getName()+"/DOWN/min");
+            max = _gd.getXmlInt(getName()+"/DOWN/max");
             break;
         case MOVELEFT:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/LEFT/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/LEFT/max");
+            min = _gd.getXmlInt(getName()+"/LEFT/min");
+            max = _gd.getXmlInt(getName()+"/LEFT/max");
             break;
         
         case DOWNLEFT:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/LEFTDU/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/LEFTDU/max");
+            min = _gd.getXmlInt(getName()+"/LEFTDU/min");
+            max = _gd.getXmlInt(getName()+"/LEFTDU/max");
             break;
         case UPLEFT:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/LEFTDU/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/LEFTDU/max");
+            min = _gd.getXmlInt(getName()+"/LEFTDU/min");
+            max = _gd.getXmlInt(getName()+"/LEFTDU/max");
             break;
         case SHOOT:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/SHOOT/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/SHOOT/max");
+            min = _gd.getXmlInt(getName()+"/SHOOT/min");
+            max = _gd.getXmlInt(getName()+"/SHOOT/max");
             break;
         case FIRE:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/FIRE/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/FIRE/max");
+            min = _gd.getXmlInt(getName()+"/FIRE/min");
+            max = _gd.getXmlInt(getName()+"/FIRE/max");
             break;
         
         default:
-            min = Gamedata::getInstance().getXmlInt(getName()+"/STAND/min");
-            max = Gamedata::getInstance().getXmlInt(getName()+"/STAND/max");
+            min = _gd.getXmlInt(getName()+"/STAND/min");
+            max = _gd.getXmlInt(getName()+"/STAND/max");
             break;
     }
     
@@ -182,7 +218,24 @@ void Player::shoot()
 
 bool Player::hit(const Drawable *obj)
 {
-    return bulletPool.colliedWith(obj);
+    if (laserFired) {
+        return laser->collidedWith(obj);
+    }
+    else
+    {
+        return bulletPool.collidedWith(obj);
+
+    }
 }
+
+void Player::laserFire()
+{
+    laser = new MultiSprite("Laser", X()+frameWidth, Y()+frameHeight/2, 0, 0);
+    laserFired = true;
+    laser->X(X() + frameWidth);
+    laser->Y(Y() + frameHeight/2);
+}
+
+
 
 
