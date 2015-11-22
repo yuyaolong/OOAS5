@@ -40,7 +40,8 @@ Manager::Manager() :
   viewWidth(_gd.getXmlInt("view/width")/2),
   gundam(),
   hud(Hud::getInstance()),
-    health("health")
+  health("health"),
+  playerCollsionInterTime(0)
 {
      if (SDL_Init(SDL_INIT_VIDEO) != 0) {
          throw string("Unable to initialize SDL: ");
@@ -89,20 +90,30 @@ Manager::Manager() :
 
 
 
-void Manager::enemyCollisionDetec()
+void Manager::collisionDetec(Uint32 ticks)
 {
+    playerCollsionInterTime += ticks;
     for (int i=0; i<eachSpritsNumbe[0]; i++) {
-        if (sprites[i]->X()<(gundam->X() + viewWidth*1.5)  && sprites[i]->X()>gundam->X() ) {
+        if (sprites[i]->X()<(gundam->X() + viewWidth*2)  && sprites[i]->X()>gundam->X() ) {
             Scaledsprite* tmp = dynamic_cast<Scaledsprite*>(sprites[i]);
             if (tmp->getReDisplay() && gundam->hit(tmp)) {
                 tmp->setReDisplay(false);
                 tmp->explode();
                 std::cout<<"collision: "<<i<<"\n";
+                gundam->addScore();
             }
             
-            
-            if (tmp->getReDisplay() && tmp->collidedWith(gundam)) {
-                gundam->explode();
+            if (playerCollsionInterTime > 1000) {
+                if (tmp->getReDisplay() && tmp->collidedWith(gundam)) {
+                    health.getHurt();
+                    playerCollsionInterTime = 0;
+                    if (health.getCurrentLength() == 0) {
+                        gundam->explode();
+                        tmp->setReDisplay(true);
+                        health.reset();
+                        gundam->reset();
+                    }
+                }
             }
         }
 
@@ -114,7 +125,7 @@ void Manager::cleanHitedSprite()
 {
     std::vector<Drawable*>::iterator ptr = sprites.begin();
     for (int i=0; i<eachSpritsNumbe[0]; i++) {
-        if ((dynamic_cast<TwoWaySprite*>(*ptr))->canDelete) {
+        if ((dynamic_cast<Scaledsprite*>(*ptr))->canDelete) {
             std::cout<<"delete sprite\n";
             delete *ptr;
             ptr = sprites.erase(ptr);
@@ -123,8 +134,20 @@ void Manager::cleanHitedSprite()
         else
             ptr++;
     }
-    
-    
+}
+
+
+
+void Manager::showAginHitedSprite()
+{
+    for (int i =0; i<eachSpritsNumbe[0]; i++) {
+        Scaledsprite* tmp = dynamic_cast<Scaledsprite*>(sprites[i]);
+        if (tmp->canDelete) {
+            tmp->resetVP();
+            tmp->canDelete = false;
+            tmp->setReDisplay(true);
+        }
+    }
 }
 
 
@@ -136,7 +159,6 @@ void Manager::switchSprite() {
     for (int k=0; k<eachSpritsNumbe[whichKindSprite%(eachSpritsNumbe.size())]; ++k) {
         currentSprite++;
     }
-    
     if ( currentSprite == sprites.end() ) {
         currentSprite = sprites.begin();
     }
@@ -145,6 +167,7 @@ void Manager::switchSprite() {
 
 
 void Manager::draw() const {
+    
     for (unsigned int i=0; i<worlds.size(); i++) {
             worlds[i]->draw();
         }
@@ -155,6 +178,7 @@ void Manager::draw() const {
       ++ptr;
     }
     io.printMessageAt(title, 650, 450);
+    io.printMessageAt(title, 650, 450);
     hud.draw();
     health.draw();
     viewport.draw();
@@ -163,7 +187,7 @@ void Manager::draw() const {
 
 
 void Manager::update() {
-    cleanHitedSprite();
+    showAginHitedSprite();
     clock.update();
     Uint32 ticks = clock.getTicksSinceLastFrame();
     std::vector<Drawable*>::const_iterator ptr = sprites.begin();
@@ -180,7 +204,7 @@ void Manager::update() {
     hud.update(ticks);
     health.update(ticks);
     viewport.update(); // always update viewport last
-    enemyCollisionDetec();
+    collisionDetec(ticks);
 }
 
 void Manager::play() {
@@ -251,6 +275,10 @@ void Manager::play() {
             gundam->laserFire();
         }
         
+        if (keystate[SDLK_r]) {
+            resetGame();
+        }
+        
         if (keystate[SDLK_w] && keystate[SDLK_d]) {
             gundam->setStatus(UPRIGHT);
         }
@@ -279,3 +307,12 @@ void Manager::play() {
     
   }
 }
+
+void Manager::resetGame()
+{
+    std::cout<<"resetGame\n";
+    gundam->reset();
+    health.reset();
+
+}
+

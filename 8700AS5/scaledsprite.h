@@ -17,9 +17,12 @@ public:
     virtual void draw() const;
     void setReDisplay(bool reds);
     bool getReDisplay()const;
+    
+    void resetVP();
 private:
     bool reDisplay;
 };
+
 
 
 

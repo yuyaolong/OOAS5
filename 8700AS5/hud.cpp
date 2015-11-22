@@ -55,9 +55,10 @@ void Hud::draw() const {
     io.printMessageAt("W - move up", 10, 120);
     io.printMessageAt("l - slow; p - pasue", 10, 140);
     io.printMessageAt("you can press both buttons", 10, 160);
-    //io.printMessageAt("r - restart game", 10, 140);
-    //io.printMessageAt("SPACE - throw acorn", 10, 160);
-    io.printMessageAt("Press T to switch sprites", 10, 180);
+    io.printMessageAt("r - restart game", 10, 180);
+    io.printMessageAt("SPACE - throw bullet", 10, 200);
+    io.printMessageAt("z - laser(need points)", 10, 220);
+    io.printMessageAt("Press T to switch sprites", 10, 240);
     //std::cout<<&bulletpool<<"\n";
     io.printMessageValueAt("Bullets: ", bulletPool.bulletCount(), 140, 20);
     io.printMessageValueAt("FreeList: ", bulletPool.freeCount(), 140, 40);

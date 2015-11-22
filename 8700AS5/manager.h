@@ -43,6 +43,7 @@ private:
     Player *gundam;
     Hud& hud;
     Health health;
+    int playerCollsionInterTime;
     
     void draw() const;
     void update();
@@ -50,7 +51,9 @@ private:
     Manager(const Manager&);
     Manager& operator=(const Manager&);
     void makeFrame();
-    void enemyCollisionDetec();
+    void collisionDetec(Uint32 ticks);
     void cleanHitedSprite();
+    void showAginHitedSprite();
+    void resetGame();
     
 };

@@ -28,6 +28,9 @@ public:
     void shoot();
     bool hit(const Drawable* obj);
     void laserFire();
+    void addScore();
+    unsigned int getScore()const{return score;}
+    void reset();
     
 private:
     PlayerStatus state;
@@ -38,6 +41,10 @@ private:
     bool laserFired;
     int laserTime;
     int delatTime;
+    unsigned int score;
+    unsigned int laserCounter;
+    unsigned int bonus;
+    unsigned int scoreNeed;
     
     Player(const Player&);
     Player& operator=(const Player&);

@@ -17,7 +17,12 @@ Player::Player(const std::string& name):
         laser(NULL),
         laserFired(false),
         laserTime(_gd.getXmlInt("Laser/showtime")),
-        delatTime(0)
+        delatTime(0),
+        score(0),
+        laserCounter(0),
+        bonus(_gd.getXmlInt(name+"/bonus")),
+        scoreNeed(_gd.getXmlInt(name+"/scoreneed"))
+
 {
     velocity[0] =abs(_gd.getXmlInt(name+"/speedX"));
     velocity[1] =abs(_gd.getXmlInt(name+"/speedY"));
@@ -27,6 +32,15 @@ void Player::draw() const
 {
 
     if (!gameOver) {
+        
+        static unsigned int hisgestScore = 0;
+        if (hisgestScore < score) {
+            hisgestScore = score;
+        }
+        
+        IOManager::getInstance().printMessageValueAt("Your Score: ", score, 700, 20);
+        IOManager::getInstance().printMessageValueAt("Highest Score: ", hisgestScore, 680, 40);
+        IOManager::getInstance().printMessageValueAt("Laser counter: ", laserCounter, 680, 60);
         if (explosion) {
             explosion->draw();
             return;
@@ -34,8 +48,7 @@ void Player::draw() const
         if (laserFired) {
             laser->draw();
         }
-        
-         TwoWaySprite::draw();
+        TwoWaySprite::draw();
          bulletPool.draw();
     }
 }
@@ -141,10 +154,22 @@ void Player::setStatus(PlayerStatus s)
                 velocityX(-velocity[0]);
                 velocityY(1*velocity[1]);
                 break;
+            case FIRE:
+                velocityX(0);
+                velocityY(0);
+                break;
             default:
+                velocityX(0);
+                velocityY(0);
                 break;
         }
     }
+    else
+    {
+        velocityX(0);
+        velocityY(0);
+    }
+    
 }
 
 
@@ -153,6 +178,9 @@ void Player::advanceFrame(Uint32 ticks)
     unsigned int min = 0;
     unsigned int max = 0;
     
+    if (laserFired) {
+        
+    }
     switch (state) {
         case STAND:
             min = _gd.getXmlInt(getName()+"/STAND/min");
@@ -191,7 +219,6 @@ void Player::advanceFrame(Uint32 ticks)
             min = _gd.getXmlInt(getName()+"/FIRE/min");
             max = _gd.getXmlInt(getName()+"/FIRE/max");
             break;
-        
         default:
             min = _gd.getXmlInt(getName()+"/STAND/min");
             max = _gd.getXmlInt(getName()+"/STAND/max");
@@ -230,12 +257,39 @@ bool Player::hit(const Drawable *obj)
 
 void Player::laserFire()
 {
-    laser = new MultiSprite("Laser", X()+frameWidth, Y()+frameHeight/2, 0, 0);
-    laserFired = true;
-    laser->X(X() + frameWidth);
-    laser->Y(Y() + frameHeight/2);
+    if (!laserFired && laserCounter>0) {
+        laser = new MultiSprite("Laser", X()+frameWidth, Y()+frameHeight*1.0/3, 0, 0);
+        laserFired = true;
+        laserCounter--;
+    }
+
 }
 
+void Player::addScore()
+{
+    score += bonus;
+    if (score%scoreNeed == 0) {
+        laserCounter++;
+    }
+}
+
+
+void Player::reset()
+{
+    score = 0;
+
+    
+    this->setPosition( Vector2f(_gd.getXmlInt(getName()+"/startLoc/x"),
+                                _gd.getXmlInt(getName()+"/startLoc/y"))
+                      );
+    
+    this->setVelocity(Vector2f(
+                               _gd.getXmlInt(getName()+"/speedX"),
+                               _gd.getXmlInt(getName()+"/speedY"))
+                      );
+    laserCounter = 0;
+    
+}
 
 
 

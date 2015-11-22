@@ -101,9 +101,13 @@
   <speedY>300</speedY>
   <transparency>true</transparency>
   <chunk>
-      <size>30</size>
-      <distance>100</distance>
+      <size>20</size>
+      <distance>50</distance>
   </chunk>
+  
+  <bonus>5</bonus>
+  <scoreneed>20</scoreneed>
+  
 </Gundam>
 
 <Enemy>
@@ -147,11 +151,13 @@
 <Vessel1>
   <file>images/Vessel1.png</file>
   <number>5</number>
+  <frames>1</frames>
+  <frameInterval>200</frameInterval>
   <scale min="0.5" max="1.1"/>
   <srcX>0</srcX>
   <srcY>0</srcY>
-  <width>359</width>
-  <height>200</height>
+  <width>269</width>
+  <height>150</height>
   <startLoc x="320" y="240"/>
   <speedX>20</speedX>
   <speedY>0</speedY>
@@ -177,7 +183,7 @@
     <x>7</x>
     <y>15</y>
     <length>260</length>
-    <width>220</width>
+    <width>240</width>
     <thick>2</thick>
     <showtime>3000</showtime>
 </hud>
@@ -186,6 +192,7 @@
     <x>10</x>
     <y>460</y>
     <length>200</length>
+    <hurt>40</hurt>
     <width>140</width>
     <thick>14</thick>
     <increment>20</increment>
@@ -195,9 +202,9 @@
 
 <Laser>
     <file>images/Laser.png</file>
-    <frames>1</frames>
+    <frames>2</frames>
     <frameInterval>100</frameInterval>
-    <showtime>1000</showtime>
+    <showtime>2000</showtime>
     <srcX>0</srcX>
     <srcY>0</srcY>
     <width>854</width>

@@ -48,5 +48,16 @@ bool Scaledsprite::getReDisplay()const
     return reDisplay;
 }
 
-      
-      
+void Scaledsprite::resetVP()
+{
+    this->setPosition(Vector2f( _gd.getXmlInt("world/width")*(rand()*1.0/RAND_MAX),
+                               _gd.getXmlInt("world/height")*(rand()*1.0/RAND_MAX))
+                      );
+    
+    this->setVelocity(Vector2f(
+                      _gd.getXmlInt(getName()+"/speedX")*(rand()%2?-1:+1),
+                      _gd.getXmlInt(getName()+"/speedY")*(rand()%2?-1:+1))
+                               );
+}
+
+

@@ -12,9 +12,10 @@ public:
          float t, int inc, Uint32 c, float sp);
   void draw() const;
   void update(Uint32);
-  void reset() { currentLength = totalLength / 2; }
+  void reset() { currentLength = totalLength; }
   void updateValue(int val);
   int getCurrentLength() { return currentLength; }
+  void getHurt();
 private:
   SDL_Surface* screen;
   Vector2f start;
@@ -28,9 +29,11 @@ private:
   const Uint32 GRAY;
   const Uint32 BLACK;
   const Uint32 color;
+  int hurt;
   void drawBox() const;
   Health(const Health&);
   Health& operator=(const Health&);
+
 };
 
 #endif
