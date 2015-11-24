@@ -15,7 +15,6 @@
 		E1099DDF1BF940A5001C0027 /* gamedata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DB71BF940A5001C0027 /* gamedata.cpp */; };
 		E1099DE01BF940A5001C0027 /* health.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DB91BF940A5001C0027 /* health.cpp */; };
 		E1099DE11BF940A5001C0027 /* hud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DBB1BF940A5001C0027 /* hud.cpp */; };
-		E1099DE21BF940A5001C0027 /* ioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DBE1BF940A5001C0027 /* ioManager.cpp */; };
 		E1099DE31BF940A5001C0027 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DC01BF940A5001C0027 /* main.cpp */; };
 		E1099DE41BF940A5001C0027 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = E1099DC11BF940A5001C0027 /* Makefile */; };
 		E1099DE51BF940A5001C0027 /* manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099DC21BF940A5001C0027 /* manager.cpp */; };
@@ -34,6 +33,8 @@
 		E143C9BA1BFFC42B00970EBE /* twowaysprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9B81BFFC42B00970EBE /* twowaysprite.cpp */; };
 		E143C9BD1BFFCA3400970EBE /* explodingSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9BB1BFFCA3400970EBE /* explodingSprite.cpp */; };
 		E143C9C01BFFCA4000970EBE /* chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9BE1BFFCA4000970EBE /* chunk.cpp */; };
+		E143C9CE1C01996500970EBE /* ioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9CC1C01996500970EBE /* ioManager.cpp */; };
+		E143C9D61C01A19E00970EBE /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9D41C01A19E00970EBE /* sound.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,8 +71,6 @@
 		E1099DBB1BF940A5001C0027 /* hud.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hud.cpp; sourceTree = "<group>"; };
 		E1099DBC1BF940A5001C0027 /* hud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hud.h; sourceTree = "<group>"; };
 		E1099DBD1BF940A5001C0027 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
-		E1099DBE1BF940A5001C0027 /* ioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ioManager.cpp; sourceTree = "<group>"; };
-		E1099DBF1BF940A5001C0027 /* ioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioManager.h; sourceTree = "<group>"; };
 		E1099DC01BF940A5001C0027 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E1099DC11BF940A5001C0027 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		E1099DC21BF940A5001C0027 /* manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = manager.cpp; sourceTree = "<group>"; };
@@ -108,6 +107,11 @@
 		E143C9BC1BFFCA3400970EBE /* explodingSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = explodingSprite.h; sourceTree = "<group>"; };
 		E143C9BE1BFFCA4000970EBE /* chunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chunk.cpp; sourceTree = "<group>"; };
 		E143C9BF1BFFCA4000970EBE /* chunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chunk.h; sourceTree = "<group>"; };
+		E143C9CC1C01996500970EBE /* ioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ioManager.cpp; sourceTree = "<group>"; };
+		E143C9CD1C01996500970EBE /* ioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioManager.h; sourceTree = "<group>"; };
+		E143C9D31C01A19E00970EBE /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
+		E143C9D41C01A19E00970EBE /* sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
+		E143C9D51C01A19E00970EBE /* sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,8 @@
 		E1099DF01BF9412C001C0027 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				E143C9CC1C01996500970EBE /* ioManager.cpp */,
+				E143C9CD1C01996500970EBE /* ioManager.h */,
 				E1099DF91BF97AA2001C0027 /* collisionStrategy.cpp */,
 				E1099DFA1BF97AA2001C0027 /* collisionStrategy.h */,
 				E1099DBD1BF940A5001C0027 /* images */,
@@ -162,14 +168,15 @@
 				E1099DB11BF940A5001C0027 /* font */,
 				E1099DAA1BF940A5001C0027 /* aaline.cpp */,
 				E1099DAB1BF940A5001C0027 /* aaline.h */,
+				E143C9D31C01A19E00970EBE /* sound */,
+				E143C9D41C01A19E00970EBE /* sound.cpp */,
+				E143C9D51C01A19E00970EBE /* sound.h */,
 				E1099DAC1BF940A5001C0027 /* clock.cpp */,
 				E1099DAD1BF940A5001C0027 /* clock.h */,
 				E1099DAF1BF940A5001C0027 /* extractSurface.cpp */,
 				E1099DB01BF940A5001C0027 /* extractSurface.h */,
 				E1099DB71BF940A5001C0027 /* gamedata.cpp */,
 				E1099DB81BF940A5001C0027 /* gamedata.h */,
-				E1099DBE1BF940A5001C0027 /* ioManager.cpp */,
-				E1099DBF1BF940A5001C0027 /* ioManager.h */,
 				E1099DD31BF940A5001C0027 /* vector2f.cpp */,
 				E1099DD41BF940A5001C0027 /* vector2f.h */,
 				E1099DD51BF940A5001C0027 /* viewport.cpp */,
@@ -297,14 +304,15 @@
 				E1099DE01BF940A5001C0027 /* health.cpp in Sources */,
 				E1099DE51BF940A5001C0027 /* manager.cpp in Sources */,
 				E1099DEB1BF940A5001C0027 /* sprite.cpp in Sources */,
+				E143C9D61C01A19E00970EBE /* sound.cpp in Sources */,
 				E143C9BA1BFFC42B00970EBE /* twowaysprite.cpp in Sources */,
+				E143C9CE1C01996500970EBE /* ioManager.cpp in Sources */,
 				E1099DF51BF9436E001C0027 /* bullet.cpp in Sources */,
 				E1099DDA1BF940A5001C0027 /* aaline.cpp in Sources */,
 				E143C9BD1BFFCA3400970EBE /* explodingSprite.cpp in Sources */,
 				E1099DE91BF940A5001C0027 /* randomSprite.cpp in Sources */,
 				E1099DE71BF940A5001C0027 /* parseXML.cpp in Sources */,
 				E1099DEA1BF940A5001C0027 /* scaledsprite.cpp in Sources */,
-				E1099DE21BF940A5001C0027 /* ioManager.cpp in Sources */,
 				E1099DE81BF940A5001C0027 /* player.cpp in Sources */,
 				E1099DE31BF940A5001C0027 /* main.cpp in Sources */,
 				E1099DDF1BF940A5001C0027 /* gamedata.cpp in Sources */,

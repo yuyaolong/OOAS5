@@ -41,7 +41,8 @@ Manager::Manager() :
   gundam(),
   hud(Hud::getInstance()),
   health("health"),
-  playerCollsionInterTime(0)
+  playerCollsionInterTime(0),
+  sound()
 {
      if (SDL_Init(SDL_INIT_VIDEO) != 0) {
          throw string("Unable to initialize SDL: ");
@@ -79,10 +80,10 @@ Manager::Manager() :
     }
     
     std::sort(sprites.begin(), sprites.begin()+eachSpritsNumbe[0],SpriteCompareLess());
-    
-    for (int i=0; i<20; i++) {
-        std::cout<<sprites[i]->getScale()<<"\n";
-    }
+//    
+//    for (int i=0; i<20; i++) {
+//        std::cout<<sprites[i]->getScale()<<"\n";
+//    }
     sprites.push_back(gundam);
     currentSprite = sprites.begin();
     viewport.setObjectToTrack(*(sprites.end()-1));
@@ -99,7 +100,7 @@ void Manager::collisionDetec(Uint32 ticks)
             if (tmp->getReDisplay() && gundam->hit(tmp)) {
                 tmp->setReDisplay(false);
                 tmp->explode();
-                std::cout<<"collision: "<<i<<"\n";
+                //std::cout<<"collision: "<<i<<"\n";
                 gundam->addScore();
             }
             
@@ -111,7 +112,6 @@ void Manager::collisionDetec(Uint32 ticks)
                         gundam->explode();
                         tmp->setReDisplay(true);
                         health.reset();
-                        gundam->reset();
                     }
                 }
             }
@@ -126,8 +126,8 @@ void Manager::cleanHitedSprite()
     std::vector<Drawable*>::iterator ptr = sprites.begin();
     for (int i=0; i<eachSpritsNumbe[0]; i++) {
         if ((dynamic_cast<Scaledsprite*>(*ptr))->canDelete) {
-            std::cout<<"delete sprite\n";
-            delete *ptr;
+            //std::cout<<"delete sprite\n";
+            delete (*ptr);
             ptr = sprites.erase(ptr);
             eachSpritsNumbe[0] = eachSpritsNumbe[0]-1;
         }
@@ -277,6 +277,9 @@ void Manager::play() {
         
         if (keystate[SDLK_r]) {
             resetGame();
+        }
+        if (keystate[SDLK_m]) {
+            sound.toggleMusic();
         }
         
         if (keystate[SDLK_w] && keystate[SDLK_d]) {

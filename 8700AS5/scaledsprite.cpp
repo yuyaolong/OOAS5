@@ -18,8 +18,6 @@ Scaledsprite::Scaledsprite(const std::string& name): TwoWaySprite(name,
                                                                                                              Gamedata::getInstance().getXmlFloat(name+"/scale/max"))
                                                    ),
 reDisplay(true)
-
-
 {
     velocityX(velocityX()*getScale());
     velocityY(velocityY()*getScale());

@@ -11,7 +11,7 @@
 #include "health.h"
 #include "scaledsprite.h"
 #include "bulletPool.h"
-
+#include "sound.h"
 class Manager {
 public:
     Manager ();
@@ -44,6 +44,7 @@ private:
     Hud& hud;
     Health health;
     int playerCollsionInterTime;
+    SDLSound sound;
     
     void draw() const;
     void update();

@@ -28,6 +28,8 @@ Player::Player(const std::string& name):
     velocity[1] =abs(_gd.getXmlInt(name+"/speedY"));
 }
 
+
+
 void Player::draw() const
 {
 
@@ -64,6 +66,7 @@ void Player:: update(unsigned int ticks)
             if ( explosion->chunkCount() == 0 ) {
                 delete explosion;
                 explosion = NULL;
+                this->reset();
             }
             return;
         }
@@ -178,9 +181,6 @@ void Player::advanceFrame(Uint32 ticks)
     unsigned int min = 0;
     unsigned int max = 0;
     
-    if (laserFired) {
-        
-    }
     switch (state) {
         case STAND:
             min = _gd.getXmlInt(getName()+"/STAND/min");
@@ -257,7 +257,7 @@ bool Player::hit(const Drawable *obj)
 
 void Player::laserFire()
 {
-    if (!laserFired && laserCounter>0) {
+    if ( (!laserFired) && laserCounter>0) {
         laser = new MultiSprite("Laser", X()+frameWidth, Y()+frameHeight*1.0/3, 0, 0);
         laserFired = true;
         laserCounter--;
@@ -283,9 +283,7 @@ void Player::reset()
                                 _gd.getXmlInt(getName()+"/startLoc/y"))
                       );
     
-    this->setVelocity(Vector2f(
-                               _gd.getXmlInt(getName()+"/speedX"),
-                               _gd.getXmlInt(getName()+"/speedY"))
+    this->setVelocity(Vector2f(0,0)
                       );
     laserCounter = 0;
     
