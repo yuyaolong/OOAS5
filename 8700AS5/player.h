@@ -26,11 +26,13 @@ public:
     
     void setStatus(PlayerStatus s);
     void shoot();
-    bool hit(const Drawable* obj);
+    bool hit(Drawable* obj);
     void laserFire();
     void addScore();
     unsigned int getScore()const{return score;}
     void reset();
+    
+    
     
 private:
     PlayerStatus state;

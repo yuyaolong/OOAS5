@@ -35,6 +35,7 @@
 		E143C9C01BFFCA4000970EBE /* chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9BE1BFFCA4000970EBE /* chunk.cpp */; };
 		E143C9CE1C01996500970EBE /* ioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9CC1C01996500970EBE /* ioManager.cpp */; };
 		E143C9D61C01A19E00970EBE /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E143C9D41C01A19E00970EBE /* sound.cpp */; };
+		E1CDA65B1C0EA976003E9FC2 /* smartsprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1CDA6591C0EA976003E9FC2 /* smartsprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -112,6 +113,8 @@
 		E143C9D31C01A19E00970EBE /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
 		E143C9D41C01A19E00970EBE /* sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
 		E143C9D51C01A19E00970EBE /* sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound.h; sourceTree = "<group>"; };
+		E1CDA6591C0EA976003E9FC2 /* smartsprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = smartsprite.cpp; sourceTree = "<group>"; };
+		E1CDA65A1C0EA976003E9FC2 /* smartsprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smartsprite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,14 +209,16 @@
 				E1099DAE1BF940A5001C0027 /* drawable.h */,
 				E1099DCF1BF940A5001C0027 /* sprite.cpp */,
 				E1099DD01BF940A5001C0027 /* sprite.h */,
+				E1099DCB1BF940A5001C0027 /* randomSprite.h */,
+				E1099DCA1BF940A5001C0027 /* randomSprite.cpp */,
 				E1099DC41BF940A5001C0027 /* multisprite.cpp */,
 				E1099DC51BF940A5001C0027 /* multisprite.h */,
-				E1099DCA1BF940A5001C0027 /* randomSprite.cpp */,
-				E1099DCB1BF940A5001C0027 /* randomSprite.h */,
 				E143C9B81BFFC42B00970EBE /* twowaysprite.cpp */,
 				E143C9B91BFFC42B00970EBE /* twowaysprite.h */,
 				E1099DCD1BF940A5001C0027 /* scaledsprite.cpp */,
 				E1099DCE1BF940A5001C0027 /* scaledsprite.h */,
+				E1CDA6591C0EA976003E9FC2 /* smartsprite.cpp */,
+				E1CDA65A1C0EA976003E9FC2 /* smartsprite.h */,
 			);
 			name = sprites;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				E1099DDA1BF940A5001C0027 /* aaline.cpp in Sources */,
 				E143C9BD1BFFCA3400970EBE /* explodingSprite.cpp in Sources */,
 				E1099DE91BF940A5001C0027 /* randomSprite.cpp in Sources */,
+				E1CDA65B1C0EA976003E9FC2 /* smartsprite.cpp in Sources */,
 				E1099DE71BF940A5001C0027 /* parseXML.cpp in Sources */,
 				E1099DEA1BF940A5001C0027 /* scaledsprite.cpp in Sources */,
 				E1099DE81BF940A5001C0027 /* player.cpp in Sources */,

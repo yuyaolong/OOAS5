@@ -36,6 +36,40 @@ void Scaledsprite::draw() const {
     }
 }
 
+void Scaledsprite::update(Uint32 ticks) {
+    if (explosion) {
+        explosion->update(ticks);
+        if ( explosion->chunkCount() == 0 ) {
+            canDelete = true;
+            delete explosion;
+            explosion = NULL;
+        }
+        return;
+    }
+    advanceFrame(ticks);
+    Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
+    setPosition(getPosition() + incr);
+    
+    if ( Y() < 0) {
+        velocityY( abs( velocityY() ) );
+        
+    }
+    if ( Y() > worldHeight-frameHeight) {
+        velocityY( -abs( velocityY() ) );
+        
+    }
+    
+    if ( X() < 0) {
+        velocityX( abs( velocityX() ) );
+        flipX = 1;
+    }
+    
+    if ( X() > worldWidth-frameWidth) {
+        velocityX( -abs( velocityX() ) );
+        flipX = -1;
+    }
+}
+
 void Scaledsprite::setReDisplay(bool reds)
 {
     reDisplay = reds;

@@ -7,7 +7,7 @@
 //
 
 #include "player.h"
-
+#include "smartsprite.h"
 
 Player::Player(const std::string& name):
         TwoWaySprite(name),
@@ -243,16 +243,29 @@ void Player::shoot()
 }
 
 
-bool Player::hit(const Drawable *obj)
+bool Player::hit(Drawable *obj)
 {
+    Smartsprite* tmp = dynamic_cast<Smartsprite*>(obj);
     if (laserFired) {
-        return laser->collidedWith(obj);
+        bool result = laser->collidedWith(obj);
+        if (!result) {
+            
+            if (tmp) {
+                tmp->avoidFlag = true;
+                tmp->setAvoid(laser->X(), laser->Y());
+            }
+        }
+        return result;
     }
     else
     {
+        tmp->avoidFlag = false;
+        
         return bulletPool.collidedWith(obj);
-
     }
+    
+    
+    
 }
 
 void Player::laserFire()

@@ -6,7 +6,7 @@
 #include "manager.h"
 #include "twowaysprite.h"
 #include "randomSprite.h"
-
+#include "smartsprite.h"
 
 Manager::~Manager() { 
   std::vector<Drawable*>::const_iterator ptr = sprites.begin();
@@ -67,7 +67,7 @@ Manager::Manager() :
     
     
     for (int i = 0; i< eachSpritsNumbe[0]; i++) {
-        sprites.push_back( new Scaledsprite("Enemy"));
+        sprites.push_back( new Smartsprite("Enemy"));
     }
   
     for (int i=0; i< eachSpritsNumbe[1]; i++) {
@@ -96,7 +96,7 @@ void Manager::collisionDetec(Uint32 ticks)
     playerCollsionInterTime += ticks;
     for (int i=0; i<eachSpritsNumbe[0]; i++) {
         if (sprites[i]->X()<(gundam->X() + viewWidth*2)  && sprites[i]->X()>gundam->X() ) {
-            Scaledsprite* tmp = dynamic_cast<Scaledsprite*>(sprites[i]);
+            Smartsprite* tmp = dynamic_cast<Smartsprite*>(sprites[i]);
             if (tmp->getReDisplay() && gundam->hit(tmp)) {
                 tmp->setReDisplay(false);
                 tmp->explode();
@@ -125,7 +125,7 @@ void Manager::cleanHitedSprite()
 {
     std::vector<Drawable*>::iterator ptr = sprites.begin();
     for (int i=0; i<eachSpritsNumbe[0]; i++) {
-        if ((dynamic_cast<Scaledsprite*>(*ptr))->canDelete) {
+        if ((dynamic_cast<Smartsprite*>(*ptr))->canDelete) {
             //std::cout<<"delete sprite\n";
             delete (*ptr);
             ptr = sprites.erase(ptr);
@@ -214,37 +214,42 @@ void Manager::play() {
   while ( not done ) {
     while ( SDL_PollEvent(&event) ) {
       Uint8 *keystate = SDL_GetKeyState(NULL);
-      if (event.type ==  SDL_QUIT) { done = true; break; }
+        if (event.type ==  SDL_QUIT) { done = true; break; }
        
         if (event.type == SDL_KEYUP) {
             gundam->setStatus(STAND);
         }
         
-      if(event.type == SDL_KEYDOWN) {
+//        if (event.type == SDL_MOUSEMOTION) {
+//            int x_coordinate = 0, y_coordinate=0;
+//            SDL_GetMouseState(&x_coordinate, &y_coordinate);
+//            std::cout<<x_coordinate<<"   "<<y_coordinate<<"\n";
+//        }
+        
+        if(event.type == SDL_KEYDOWN) {
           
-        if (keystate[SDLK_ESCAPE] || keystate[SDLK_q]) {
-          done = true;
-          break;
+            if (keystate[SDLK_ESCAPE] || keystate[SDLK_q]) {
+                done = true;
+                break;
+            }
+            if ( keystate[SDLK_t] ) {
+                switchSprite();
+            }
+            if ( keystate[SDLK_p] ) {
+              if ( clock.isPaused() ) clock.unpause();
+              else clock.pause();
+            }
+            if (keystate[SDLK_l]) {
+              clock.toggleSloMo();
+            }
+            if (keystate[SDLK_F4] && !makeVideo) {
+              std::cout << "Making video frames" << std::endl;
+              makeVideo = true;
+            }
+              if (keystate[SDLK_F1]) {
+                  hud.toggle();
+              }
         }
-        if ( keystate[SDLK_t] ) {
-          switchSprite();
-        }
-        if ( keystate[SDLK_p] ) {
-          if ( clock.isPaused() ) clock.unpause();
-          else clock.pause();
-        }
-        if (keystate[SDLK_l]) {
-          clock.toggleSloMo();
-        }
-        if (keystate[SDLK_F4] && !makeVideo) {
-          std::cout << "Making video frames" << std::endl;
-          makeVideo = true;
-        }
-          if (keystate[SDLK_F1]) {
-              hud.toggle();
-          }
-          
-      }
         
         if(keystate[SDLK_a])
         {

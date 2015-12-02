@@ -71,9 +71,6 @@ void Sprite::draw() const {
   frame->draw(x, y); 
 }
 
-int Sprite::getDistance(const Sprite *obj) const { 
-  return hypot(X()-obj->X(), Y()-obj->Y());
-}
 
 void Sprite::update(Uint32 ticks) { 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;

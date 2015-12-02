@@ -15,10 +15,12 @@ class Scaledsprite:public TwoWaySprite{
 public:
     Scaledsprite(const std::string& name);
     virtual void draw() const;
+    virtual void update(Uint32 ticks);
     void setReDisplay(bool reds);
     bool getReDisplay()const;
     
     void resetVP();
+    
 private:
     bool reDisplay;
 };

@@ -29,6 +29,5 @@ private:
   int frameHeight;
   int worldWidth;
   int worldHeight;
-  int getDistance(const Sprite*) const;
 };
 #endif

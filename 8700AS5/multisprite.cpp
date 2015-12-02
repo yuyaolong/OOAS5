@@ -50,6 +50,7 @@ void MultiSprite::draw() const {
   Uint32 x = static_cast<Uint32>(X());
   Uint32 y = static_cast<Uint32>(Y());
   frames[currentFrame]->draw(x, y);
+    
 }
 
 void MultiSprite::update(Uint32 ticks) { 

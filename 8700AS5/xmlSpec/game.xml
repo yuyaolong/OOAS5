@@ -135,7 +135,7 @@
     <startLoc x="0" y="0"/>
     <scale min="0.5" max="1.1"/>
     <number>30</number>
-    <frames>14</frames>
+    <frames>15</frames>
     <frameInterval>100</frameInterval>
     
     <srcX>0</srcX>

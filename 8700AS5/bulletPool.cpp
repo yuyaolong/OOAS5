@@ -10,6 +10,7 @@
 #include "collisionStrategy.h"
 #include "gamedata.h"
 #include "ioManager.h"
+#include "smartsprite.h"
 
 
 BulletPool& BulletPool::getInstance(const std::string& n)
@@ -35,19 +36,29 @@ BulletPool::BulletPool(const std::string& n):
 
 
 
-bool BulletPool::collidedWith(const Drawable *obj) const
+bool BulletPool::collidedWith(Drawable *obj) const
 {
     static PerPixelCollisionStrategy pcs;
     std::list<Bullet>::iterator ptr = bulletList.begin();
+    Smartsprite* tmp = dynamic_cast<Smartsprite*>(obj);
     while (ptr != bulletList.end()) {
+        if (tmp) {
+            tmp->setAvoid(tmp->X(), (*ptr).Y());
+            tmp->avoidFlag = true;
+        }
         if (pcs.execute(*ptr, *obj)) {
             freeList.push_back(*ptr);
             ptr = bulletList.erase(ptr);
+            tmp->avoidFlag = false;
             return true;
         }
         else
+        {
             ptr++;
+        }
     }
+    
+    
     return false;
 }
 
