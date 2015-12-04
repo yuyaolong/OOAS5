@@ -37,14 +37,14 @@ SDLSound::SDLSound() :
   if (!music) throw string("Couldn't load 100Years.mp3")+Mix_GetError();
 
   startMusic();
-  sounds.push_back( Mix_LoadWAV("sound/Boom.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/Gun.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/Thump.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/phaser.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/Putt1.wav") );
   sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/cannon.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/Larc.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/bulletHit.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/Thump.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/shot.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/laser.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/cursor.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/BeamHit.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/begin.wav") );
   for (unsigned int i = 0; i < sounds.size(); ++i) channels.push_back(i);
 }
 

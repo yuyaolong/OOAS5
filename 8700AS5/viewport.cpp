@@ -26,7 +26,7 @@ void Viewport::setObjectToTrack(const Drawable *obj) {
 
 void Viewport::draw() const {
   IOManager::getInstance().
-    printMessageCenteredAt("Tracking "+objectToTrack->getName(), 30);
+    printMessageCenteredAt("gundam fight", 30);
 }
 
 void Viewport::update() {

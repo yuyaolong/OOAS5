@@ -1,2 +1,3 @@
 collisionStrategy.o collisionStrategy.d : collisionStrategy.cpp ioManager.h gamedata.h \
- vector2f.h parseXML.h collisionStrategy.h drawable.h frame.h viewport.h
+ vector2f.h parseXML.h sound.h collisionStrategy.h drawable.h frame.h \
+ viewport.h

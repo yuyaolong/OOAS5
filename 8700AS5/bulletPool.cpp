@@ -43,7 +43,7 @@ bool BulletPool::collidedWith(Drawable *obj) const
     Smartsprite* tmp = dynamic_cast<Smartsprite*>(obj);
     while (ptr != bulletList.end()) {
         if (tmp) {
-            tmp->setAvoid(tmp->X(), (*ptr).Y());
+            tmp->setAvoid((*ptr).X(), (*ptr).Y());
             tmp->avoidFlag = true;
         }
         if (pcs.execute(*ptr, *obj)) {

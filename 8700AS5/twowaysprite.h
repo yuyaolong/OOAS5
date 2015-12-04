@@ -18,7 +18,7 @@ public:
   virtual const Frame* getFrame() const { 
     return frames[currentFrame]; 
   }
-  void explode();
+  void explode(unsigned int s);
     virtual bool collidedWith(const Drawable*) const;
     bool canDelete;
 protected:

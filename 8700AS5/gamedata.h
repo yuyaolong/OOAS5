@@ -4,7 +4,7 @@
 #include <map>
 #include "vector2f.h"
 #include "parseXML.h"
-
+#include "sound.h"
 enum PlayerStatus {
     MOVELEFT = 0,
     MOVERIGHT,
@@ -43,4 +43,5 @@ private:
 };
 
 extern Gamedata &_gd;
+static SDLSound sound;
 #endif

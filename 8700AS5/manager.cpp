@@ -42,7 +42,7 @@ Manager::Manager() :
   hud(Hud::getInstance()),
   health("health"),
   playerCollsionInterTime(0),
-  sound()
+  godMode(false)
 {
      if (SDL_Init(SDL_INIT_VIDEO) != 0) {
          throw string("Unable to initialize SDL: ");
@@ -99,19 +99,21 @@ void Manager::collisionDetec(Uint32 ticks)
             Smartsprite* tmp = dynamic_cast<Smartsprite*>(sprites[i]);
             if (tmp->getReDisplay() && gundam->hit(tmp)) {
                 tmp->setReDisplay(false);
-                tmp->explode();
+                tmp->explode(6);
                 //std::cout<<"collision: "<<i<<"\n";
                 gundam->addScore();
             }
             
             if (playerCollsionInterTime > 1000) {
                 if (tmp->getReDisplay() && tmp->collidedWith(gundam)) {
-                    health.getHurt();
-                    playerCollsionInterTime = 0;
-                    if (health.getCurrentLength() == 0) {
-                        gundam->explode();
-                        tmp->setReDisplay(true);
-                        health.reset();
+                    if (!godMode) {
+                        health.getHurt();
+                        playerCollsionInterTime = 0;
+                        if (health.getCurrentLength() == 0) {
+                            gundam->explode(0);
+                            tmp->setReDisplay(true);
+                            health.reset();
+                        }
                     }
                 }
             }
@@ -152,7 +154,7 @@ void Manager::showAginHitedSprite()
 
 
 
-
+/*
 void Manager::switchSprite() {
     static int whichKindSprite = 0;
     whichKindSprite++;
@@ -164,7 +166,7 @@ void Manager::switchSprite() {
     }
     viewport.setObjectToTrack(*currentSprite);
 }
-
+*/
 
 void Manager::draw() const {
     
@@ -177,12 +179,15 @@ void Manager::draw() const {
       (*ptr)->draw();
       ++ptr;
     }
-    io.printMessageAt(title, 650, 450);
-    io.printMessageAt(title, 650, 450);
+    io.printMessageAt(title, 770, 450);
+    if (godMode) {
+        io.printMessageAt("God mode on", 200, 40);
+    }
     hud.draw();
     health.draw();
     viewport.draw();
     SDL_Flip(screen);
+    
 }
 
 
@@ -232,9 +237,9 @@ void Manager::play() {
                 done = true;
                 break;
             }
-            if ( keystate[SDLK_t] ) {
-                switchSprite();
-            }
+//            if ( keystate[SDLK_t] ) {
+//                switchSprite();
+//            }
             if ( keystate[SDLK_p] ) {
               if ( clock.isPaused() ) clock.unpause();
               else clock.pause();
@@ -273,15 +278,22 @@ void Manager::play() {
         {
             gundam->setStatus(SHOOT);
             gundam->shoot();
+            sound[3];
         }
         if(keystate[SDLK_z])
         {
             gundam->setStatus(FIRE);
-            gundam->laserFire();
+            if(gundam->laserFire())
+            {
+                sound[4];
+            }
         }
         
         if (keystate[SDLK_r]) {
             resetGame();
+        }
+        if (keystate[SDLK_g]) {
+            godMode = !godMode;
         }
         if (keystate[SDLK_m]) {
             sound.toggleMusic();

@@ -27,7 +27,7 @@ public:
     void setStatus(PlayerStatus s);
     void shoot();
     bool hit(Drawable* obj);
-    void laserFire();
+    bool laserFire();
     void addScore();
     unsigned int getScore()const{return score;}
     void reset();

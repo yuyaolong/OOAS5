@@ -11,13 +11,12 @@
 #include "health.h"
 #include "scaledsprite.h"
 #include "bulletPool.h"
-#include "sound.h"
 class Manager {
 public:
     Manager ();
     ~Manager ();
     void play();
-    void switchSprite();
+    //void switchSprite();
 
 private:
     const bool env;
@@ -44,7 +43,7 @@ private:
     Hud& hud;
     Health health;
     int playerCollsionInterTime;
-    SDLSound sound;
+    bool godMode;
     
     void draw() const;
     void update();

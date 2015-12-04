@@ -80,6 +80,7 @@ void Health::updateValue(int val) {
 
 void Health::getHurt()
 {
+    sound[1];
     currentLength -= hurt;
     if(currentLength < 0) currentLength = 0;
     if(currentLength > totalLength) currentLength = totalLength;

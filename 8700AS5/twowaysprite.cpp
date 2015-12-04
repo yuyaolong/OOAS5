@@ -102,13 +102,15 @@ void TwoWaySprite::update(Uint32 ticks) {
     }
 }
 
-void TwoWaySprite::explode()
+void TwoWaySprite::explode(unsigned int s)
 {
     if (explosion) {
         return;
     }
     else
     {
+        sound[s];
+        
         Sprite sprite(getName(), getPosition(), getVelocity(), getFrame());
         explosion = new ExplodingSprite(sprite);
     }

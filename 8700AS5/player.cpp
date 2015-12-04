@@ -26,6 +26,7 @@ Player::Player(const std::string& name):
 {
     velocity[0] =abs(_gd.getXmlInt(name+"/speedX"));
     velocity[1] =abs(_gd.getXmlInt(name+"/speedY"));
+    sound[7];
 }
 
 
@@ -268,13 +269,17 @@ bool Player::hit(Drawable *obj)
     
 }
 
-void Player::laserFire()
+bool Player::laserFire()
 {
     if ( (!laserFired) && laserCounter>0) {
         laser = new MultiSprite("Laser", X()+frameWidth, Y()+frameHeight*1.0/3, 0, 0);
         laserFired = true;
         laserCounter--;
+        
+        return true;
+        
     }
+    return false;
 
 }
 
@@ -283,6 +288,7 @@ void Player::addScore()
     score += bonus;
     if (score%scoreNeed == 0) {
         laserCounter++;
+        sound[5];
     }
 }
 
@@ -295,6 +301,7 @@ void Player::reset()
     this->setPosition( Vector2f(_gd.getXmlInt(getName()+"/startLoc/x"),
                                 _gd.getXmlInt(getName()+"/startLoc/y"))
                       );
+    sound[7];
     
     this->setVelocity(Vector2f(0,0)
                       );

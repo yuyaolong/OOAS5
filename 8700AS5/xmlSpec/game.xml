@@ -2,7 +2,7 @@
 <GameData>
 <!-- screenTitle is also used to identify you and your animation. 
      So make sure to include your name as part of the screenTitle -->
-<screenTitle>yaolony's Sprite Animation</screenTitle>
+<screenTitle> yaolony</screenTitle>
 <maxStringSize>50</maxStringSize>
 
 <frameCap>60</frameCap>
@@ -183,7 +183,7 @@
     <x>7</x>
     <y>15</y>
     <length>260</length>
-    <width>240</width>
+    <width>260</width>
     <thick>2</thick>
     <showtime>3000</showtime>
 </hud>

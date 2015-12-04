@@ -58,7 +58,8 @@ void Hud::draw() const {
     io.printMessageAt("r - restart game", 10, 180);
     io.printMessageAt("SPACE - throw bullet", 10, 200);
     io.printMessageAt("z - laser(need points)", 10, 220);
-    io.printMessageAt("Press T to switch sprites", 10, 240);
+    io.printMessageAt("G - god mode", 10, 240);
+    io.printMessageAt("Goal is fight for highest score", 10, 260);
     //std::cout<<&bulletpool<<"\n";
     io.printMessageValueAt("Bullets: ", bulletPool.bulletCount(), 140, 20);
     io.printMessageValueAt("FreeList: ", bulletPool.freeCount(), 140, 40);
